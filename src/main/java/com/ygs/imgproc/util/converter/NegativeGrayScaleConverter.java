@@ -7,13 +7,16 @@ import java.awt.image.BufferedImage;
 public class NegativeGrayScaleConverter implements Converter {
     private GrayScaleConverter grayScaleConverter;
     private RGB[][] negative;
+    private BufferedImage img;
     public NegativeGrayScaleConverter(BufferedImage image){
         grayScaleConverter = new GrayScaleConverter(image);
+        img = image;
     }
 
     @Override
     public void convert() {
         grayScaleConverter.convert();
+        negative = new RGB[img.getWidth()][img.getHeight()];
         RGB[][] grayscale = grayScaleConverter.getConverted();
         for(int i=0;i<grayscale.length;i++){
             for(int j=0;j<grayscale[0].length;j++){

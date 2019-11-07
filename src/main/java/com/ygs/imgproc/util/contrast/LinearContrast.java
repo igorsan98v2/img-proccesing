@@ -7,7 +7,7 @@ import com.ygs.imgproc.util.colorspace.RGB;
 
 import java.awt.image.BufferedImage;
 
-public class LinearContrast2 extends Operation implements Contrast {
+public class LinearContrast extends Operation implements Contrast {
     private class InputMinMax{
         public RGB min;
         public RGB max;
@@ -15,19 +15,14 @@ public class LinearContrast2 extends Operation implements Contrast {
 
     private RGB[][] contrast;
 
-    private float alpha;
-    private float beta;
-    public LinearContrast2(BufferedImage bufferedImage, float alpha){
+
+    public LinearContrast(BufferedImage bufferedImage){
         super(bufferedImage);
-        this.alpha = alpha;
-        this.beta = 255*(1-alpha);
 
     }
     @Override
     public void makeContrast() {
-
-
-        initContrast();
+        contrast = new RGB[img.getWidth()][img.getHeight()];
         InputMinMax minMax = findInputMin();
         for(int x=0;x<img.getWidth();x++){
             for(int y=0;y<img.getHeight();y++){
@@ -39,23 +34,7 @@ public class LinearContrast2 extends Operation implements Contrast {
 
         }
     }
-    private int calcPreContrast(int colorPart){
-        return Math.round((colorPart*alpha) + beta);
-    }
-    private void initContrast(){
-        contrast = new RGB[img.getWidth()][img.getHeight()];
 
-        for(int x=0;x<img.getWidth();x++){
-            for(int y=0;y<img.getHeight();y++){
-                int r = calcPreContrast(rgb[x][y].r);
-                int g = calcPreContrast(rgb[x][y].g);
-                int b = calcPreContrast(rgb[x][y].b);
-                contrast[x][y] = new RGB(r,g,b);
-                }
-
-            }
-
-    }
     @Override
     public RGB[][] getContrast() {
         if(contrast==null){

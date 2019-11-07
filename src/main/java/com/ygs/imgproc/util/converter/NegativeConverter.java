@@ -13,6 +13,7 @@ public class NegativeConverter extends ConverterAbstract {
 
     @Override
     public void convert() {
+        converted = new RGB[rgb.length][rgb[0].length];
         for(int i=0;i<rgb.length;i++){
             for(int j=0;j<rgb[0].length;j++){
                 int rNegative = 255-rgb[i][j].r;

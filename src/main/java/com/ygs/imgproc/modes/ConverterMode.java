@@ -24,6 +24,10 @@ public class ConverterMode implements Mode {
             case RGB_INVERSION:
                 converter = new NegativeConverter(bufferedImage);
                 break;
+            case GS_INVERSION:
+                converter = new NegativeGrayScaleConverter(bufferedImage);
+                break;
+
 
         }
     }

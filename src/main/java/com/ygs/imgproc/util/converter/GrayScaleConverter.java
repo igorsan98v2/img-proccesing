@@ -18,13 +18,15 @@ public class GrayScaleConverter extends ConverterAbstract {
 
        for(int i=0;i<rgb.length;i++){
            for(int j=0;j<rgb[0].length;j++){
-               int grayScale = (int)(0.299*rgb[i][j].r + 0.587*rgb[i][j].g + 0.114*rgb[i][j].b);
+               int grayScale =  getBrightness(rgb[i][j]);
                converted[i][j] = new RGB(grayScale,grayScale,grayScale);
            }
        }
 
     }
-
+    public int getBrightness (RGB rgb){
+        return  (int)(0.299*rgb.r + 0.587*rgb.g + 0.114*rgb.b);
+    }
     @Override
     public RGB[][] getConverted() {
         if(converted[0][0]==null)

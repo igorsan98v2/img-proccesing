@@ -2,6 +2,7 @@ package com.ygs.imgproc.modes;
 
 import com.ygs.imgproc.util.colorspace.RGB;
 import com.ygs.imgproc.util.contrast.Contrast;
+import com.ygs.imgproc.util.contrast.ContrastInAllRange;
 import com.ygs.imgproc.util.contrast.LinearContrast;
 
 import java.awt.image.BufferedImage;
@@ -10,8 +11,11 @@ import java.awt.image.BufferedImage;
 public class ContrastMode implements Mode {
     Contrast contrast;
 
-    public ContrastMode(RGB min, RGB max, BufferedImage bufferedImage){
-       contrast = new LinearContrast(bufferedImage,min,max);
+    public ContrastMode(BufferedImage bufferedImage){
+       contrast = new LinearContrast(bufferedImage);
+    }
+    public ContrastMode(BufferedImage bufferedImage,float a){
+        contrast = new ContrastInAllRange(bufferedImage,a);
     }
 
     @Override
