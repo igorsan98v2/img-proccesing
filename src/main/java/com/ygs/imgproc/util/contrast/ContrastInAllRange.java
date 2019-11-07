@@ -1,13 +1,11 @@
 package com.ygs.imgproc.util.contrast;
 
-
 import com.ygs.imgproc.util.Operation;
-
 import com.ygs.imgproc.util.colorspace.RGB;
 
 import java.awt.image.BufferedImage;
 
-public class LinearContrast2 extends Operation implements Contrast {
+public class ContrastInRange extends Operation implements Contrast {
     private class InputMinMax{
         public RGB min;
         public RGB max;
@@ -28,7 +26,7 @@ public class LinearContrast2 extends Operation implements Contrast {
 
 
         initContrast();
-        InputMinMax minMax = findInputMin();
+        LinearContrast2.InputMinMax minMax = findInputMin();
         for(int x=0;x<img.getWidth();x++){
             for(int y=0;y<img.getHeight();y++){
                 int r = findNewColor(minMax.min.r,minMax.max.r,rgb[x][y].r);
@@ -51,9 +49,9 @@ public class LinearContrast2 extends Operation implements Contrast {
                 int g = calcPreContrast(rgb[x][y].g);
                 int b = calcPreContrast(rgb[x][y].b);
                 contrast[x][y] = new RGB(r,g,b);
-                }
-
             }
+
+        }
 
     }
     @Override
@@ -69,7 +67,7 @@ public class LinearContrast2 extends Operation implements Contrast {
 
     }
 
-    private InputMinMax  findInputMin(){
+    private LinearContrast2.InputMinMax findInputMin(){
         int rMax=0,gMax=0,bMax=0;
         int rMin=255,gMin=255,bMin=0;
         for(int x=0;x<img.getWidth();x++){
@@ -98,10 +96,9 @@ public class LinearContrast2 extends Operation implements Contrast {
             }
         }
 
-        InputMinMax minMax = new InputMinMax();
+        LinearContrast2.InputMinMax minMax = new LinearContrast2.InputMinMax();
         minMax.min =  new RGB(rMin,gMin,bMin);
         minMax.max =  new RGB(rMax,gMax,bMax);
         return minMax;
     }
-
 }
