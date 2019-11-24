@@ -76,22 +76,29 @@ public class HSLConverter extends ConverterAbstract {
         if(max.value == 0){
             return 0;
         }
+        double h = 0;
         switch (max.type){
             case R:
-                return  60*(((rgb.g-rgb.b)/delta)%6);
-
+                h =  60*(((rgb.g-rgb.b)/delta)%6);
+                break;
             case G:
-                return 60*(((rgb.b-rgb.r)/delta)+2);
+                h = 60*(((rgb.b-rgb.r)/delta)+2);
+                break;
             case B:
-                return 60*(((rgb.r-rgb.g)/delta)+4);
+                h = 60*(((rgb.r-rgb.g)/delta)+4);
+                break;
                 default:return 0;
 
         }
-
+        if(h>0)
+            return h;
+        else {
+            return  360-h;
+        }
     }
     private RGB backConvert(HSL hsl){
         double c = (1- Math.abs(2*hsl.getL()-1))*hsl.getS();
-        double x = c*(1-Math.abs((hsl.getH()/60)%2-1));
+        double x = c*(1-Math.abs(hsl.getH()/60%2-1));
         double m = hsl.getL() - (c/2);
         RGBInRange rgb;
         if(hsl.getH()<60){
@@ -109,7 +116,7 @@ public class HSLConverter extends ConverterAbstract {
         else if(hsl.getH()<300){
             rgb = new RGBInRange(x,0,c);
         }
-        else  rgb = new RGBInRange(x,0,c);
+        else  rgb = new RGBInRange(c,0,x);
         int r = (int)((rgb.r+m)*255.0);
         int g = (int)((rgb.g+m)*255.0);
         int b = (int)((rgb.b+m)*255.0);
