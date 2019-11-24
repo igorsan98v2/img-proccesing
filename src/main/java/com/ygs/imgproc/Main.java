@@ -56,35 +56,8 @@ public class Main {
                RGB[][] rgbs = selected.getImage();
                saveImg(rgbs,output+"."+format,format,img);
             }
-            else throw new Exception("dont have image!");
+            else throw new ParseException("dont have image!");
 
-            /*img = ImageIO.read(new File(original));
-            Converter hsvConverter = new GrayScaleConverter(img);
-            BufferedImage image = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
-            hsvConverter.convert();
-            RGB[][] rgbs = hsvConverter.getConverted();
-            for(int x=0;x<img.getWidth();x++){
-                for(int y=0;y<img.getHeight();y++) {
-
-                    image.setRGB(x,y,rgbs[x][y].getRGB());
-
-                }
-            }
-
-            /*
-            for(int x=0;x<img.getWidth();x++){
-                for(int y=0;y<img.getHeight();y++) {
-                    RGB rgb = new RGB(img.getRGB(x,y));
-
-                    image.setRGB(x,y,rgb.getRGB());
-
-                }
-            }
-            */
-
-
-
-            //ImageIO.write(image, "png", new File("/home/igorsan98/Documents/Untitled01.png"));
 
         }
         catch (IOException e){
@@ -99,13 +72,16 @@ public class Main {
 
     }
     public static void saveImg(RGB [][]rgbs,String path,String format,BufferedImage original) throws IOException{
-        BufferedImage image = new BufferedImage(original.getWidth(), original.getHeight(), BufferedImage.TYPE_INT_RGB);
+        BufferedImage image = new BufferedImage(rgbs.length, rgbs[0].length, BufferedImage.TYPE_INT_RGB);
 
-        for(int x=0;x<original.getWidth();x++){
-            for(int y=0;y<original.getHeight();y++) {
-
-                image.setRGB(x,y,rgbs[x][y].getRGB());
-
+        for(int x=0;x<image.getWidth();x++){
+            for(int y=0;y<image.getHeight();y++) {
+                try {
+                    image.setRGB(x, y, rgbs[x][y].getRGB());
+                }
+                catch (NullPointerException e){
+                    System.out.println(e.getMessage()+ String.format("`couse x=%d y=%d null" ,x,y));
+                }
             }
         }
         ImageIO.write(image,format,new File(path));

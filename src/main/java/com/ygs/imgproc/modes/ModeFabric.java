@@ -1,13 +1,11 @@
 package com.ygs.imgproc.modes;
 
-import com.ygs.imgproc.util.colorspace.RGB;
-import com.ygs.imgproc.util.scaler.Scaler;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Scanner;
+
 
 import static com.ygs.imgproc.modes.ModeNames.*;
 

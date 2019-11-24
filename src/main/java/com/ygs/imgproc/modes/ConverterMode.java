@@ -19,7 +19,7 @@ public class ConverterMode implements Mode {
                 converter = new HSVConverter(bufferedImage);
                 break;
             case TO_HSL:
-
+                converter = new HSLConverter(bufferedImage);
                 break;
             case RGB_INVERSION:
                 converter = new NegativeConverter(bufferedImage);

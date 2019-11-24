@@ -13,12 +13,6 @@ public class ScalerInterpolate extends Operation implements Scaler{
 
     }
 
-    /*i:0123
-        0246
-      i:0123456
-        0123456
-
-    */
 
     @Override
     public void scale() {
