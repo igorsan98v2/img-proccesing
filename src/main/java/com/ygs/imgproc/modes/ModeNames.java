@@ -3,7 +3,7 @@ package com.ygs.imgproc.modes;
 public class ModeNames {
     public static final String CONVERTER_TYPE = "convert";
     public static final String SCALER_TYPE= "scale";
-    public static final String BORDERS_TYPE = "border";
+    public static final String BORDERS_TYPE = "edges";
     public static final String BINARIZATION_TYPE = "binarizate";
     public static final String CONTRAST_TYPE = "contrast";
 
@@ -23,6 +23,10 @@ public class ModeNames {
     //binarization
     public static final String BINARIZATE = "binarizate";
     public static final String GS_BINARIZATE = "gs-binarizate";
+
+    //edges
+    public static final String CANNY = "canny";
+    public static final String FREICHEN = "freichen";
 
 
 }

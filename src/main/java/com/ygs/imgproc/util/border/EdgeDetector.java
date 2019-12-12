@@ -2,7 +2,7 @@ package com.ygs.imgproc.util.border;
 
 import com.ygs.imgproc.util.colorspace.RGB;
 
-public interface Border {
+public interface EdgeDetector {
     void draw();
-    RGB[][] getBorders();
+    RGB[][] getEdges();
 }

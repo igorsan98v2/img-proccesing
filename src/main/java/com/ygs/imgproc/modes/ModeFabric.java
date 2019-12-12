@@ -44,7 +44,7 @@ public class ModeFabric {
                 break;
 
             case BORDERS_TYPE:
-                selected = null;
+                selected = new BorderMode(modeOptioon,img);
                 break;
         }
         return selected;
